@@ -8,7 +8,7 @@ public sealed class Visualizer : MonoBehaviour
 {
     #region Editable attributes
 
-    [SerializeField] ImageSource _source = null;
+    [SerializeField] WebCamManager _webcam = null;
     [SerializeField, Range(0, 1)] float _threshold = 0.5f;
     [SerializeField] ResourceSet _resources = null;
     [SerializeField] Shader _visualizer = null;
@@ -45,8 +45,12 @@ public sealed class Visualizer : MonoBehaviour
 
     void Update()
     {
-        _detector.ProcessImage(_source.Texture, _threshold);
-        _previewUI.texture = _source.Texture;
+        if (!_webcam.Tex) {
+            return;
+        }
+        
+        _detector.ProcessImage(_webcam.Tex, _threshold);
+        _previewUI.texture = _webcam.Tex;
 
         if (Input.GetMouseButtonDown(0))
             foreach (var d in _detector.Detections) Debug.Log(d);

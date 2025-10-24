@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="UltraFace.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+</Solution>
